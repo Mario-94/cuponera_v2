@@ -1,0 +1,9 @@
+{
+  "name": "eslint-plugin-dfw",
+  "version": "0.1.0",
+  "description": "Disallow import statements with module.exports",
+  "license": "public domain",
+  "peerDependencies": {
+    "eslint": "^4.4.1"
+  }
+}
