@@ -49,13 +49,13 @@ export class QrScannerComponent extends React.Component {
                   onError={this.handleError}
                   onScan={this.handleScan}
                   style={{ width: "100%" }}
-                  /*   value={this.props.history.push(`/validateCupon/${this.state.currentQR}`)} */
+                  
                 />
                 {console.log(this.state.currentQR)}
               </CardBody>
             </Card>
           </Col>
-          <p>{console.log(this.state.QrReader)}</p>
+          
         </Row>
       );
     }

@@ -7,6 +7,8 @@ class CouponValidation extends Component {
     return (
       <div center>
         Felicidades has utilizado un cupon
+        {console.log(couponsList)
+        }
         {/* {setTimeout(() => {
           this.props.history.push(`/detallePublico/${this.props.match.params.id}`);
         }, 4000)} */}

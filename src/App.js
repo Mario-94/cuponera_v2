@@ -13,6 +13,7 @@ import { CouponPublicListContainer } from './containers/CouponPublicListContaine
 import { QrReaderContainer } from './containers/QrReaderContainer';
 import { CouponPublicDetail } from './containers/CouponPublicDetail';
 import {CouponValidationComponent  } from './componets/CouponValidationComponent';
+import {Prueba1} from './componets/prueba';
 
 
 function App() {
@@ -46,6 +47,11 @@ function App() {
                   <Link to="/listadoPublico">Listado publico</Link>
                 </NavLink>
               </NavItem>
+              <NavItem>
+                <NavLink>
+                  <Link to="/puebas">Prueba</Link>
+                </NavLink>
+              </NavItem>
             </Nav>
           </Navbar>
           <Route path="/crear_cupon" component={CouponFormContainer} />
@@ -55,7 +61,8 @@ function App() {
           <Route path="/update/:id" component={UpdateCouponContainer} />
           <Route path="/listadoPublico" component={CouponPublicListContainer} />
           <Route path="/detallePublico/:id" component={CouponPublicDetail} />    
-          <Route path="/validateCupon/:id" component={CouponValidationComponent}/>      
+          <Route path="/validateCupon/:id" component={CouponValidationComponent}/> 
+          <Route path="/puebas"component={Prueba1}/>
         </div>
       </Router>
     </div>

@@ -53,6 +53,7 @@ function rootReducer(state = initialState, action) {
       case UPDATE_TOTAL_USES:
           const { id, json2 } = action.payload;
           
+       
           
           return Object.assign({}, state, {
              ...state,

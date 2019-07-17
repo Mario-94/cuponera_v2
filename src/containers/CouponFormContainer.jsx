@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import { formValueSelector, change } from 'redux-form';
-import { connect } from 'react-redux';
-import { Container } from 'reactstrap';
+import React, { Component } from "react";
+import { formValueSelector, change } from "redux-form";
+import { connect } from "react-redux";
+import { Container } from "reactstrap";
 
 // Css
-import '../App.css';
+import "../App.css";
 
 // Components
-import { CouponForm } from '../componets/CouponForm';
-import { CustomerList } from '../componets/CustomersList';
+import { CouponForm } from "../componets/CouponForm";
+import { CustomerList } from "../componets/CustomersList";
 
 // Action
-import { retriveCoupon, updateCoupon, AddCoupons } from '../actions/coupons';
+import { retriveCoupon, updateCoupon, AddCoupons } from "../actions/coupons";
 
 class CouponFormComponent extends Component {
   constructor(props) {
@@ -38,9 +38,7 @@ class CouponFormComponent extends Component {
       Object.keys(this.props.initialValues).length
     ) {
       Object.keys(this.props.initialValues).forEach(element => {
-        this.props.dispatch(
-          change('cuponsForm', element, this.props.initialValues[element]),
-        );
+        this.props.dispatch(change("cuponsForm", element, this.props.initialValues[element]));
       });
     }
   }
@@ -56,14 +54,13 @@ class CouponFormComponent extends Component {
     if (id) {
       return updateCoupon(id, values);
     }
-    console.log(values)
-     if(!values.valid_since){
-      console.log('validando el published_since');
-      
-      values.valid_since=values.published_since;
-    } 
-    return AddCoupons({ ...values, total_uses: 0 });
+    console.log(values);
+    if (!values.valid_since) {
+      console.log("validando el published_since");
 
+      values.valid_since = values.published_since;
+    }
+    return AddCoupons({ ...values, total_uses: 0 });
   }
   render() {
     const {
@@ -75,7 +72,6 @@ class CouponFormComponent extends Component {
       list_price,
       discount_price,
       discount_percentage,
-    
     } = this.props;
 
     return (
@@ -90,7 +86,6 @@ class CouponFormComponent extends Component {
           list_price={list_price}
           discount_price={discount_price}
           discount_percentage={discount_percentage}
-        
         />
 
         {readOnly && <CustomerList />}
@@ -99,14 +94,14 @@ class CouponFormComponent extends Component {
   }
 }
 
-const selector = formValueSelector('cuponsForm');
+const selector = formValueSelector("cuponsForm");
 const mapStateToProps = (readOnly, asDetail) => state => {
   const obj = {
-    discountPercentage: selector(state, 'porcentage_descuento'),
+    discountPercentage: selector(state, "porcentage_descuento"),
     // uno es de dinero y el otro de porcentaje
-    list_price: selector(state, 'list_price'),
-    discount_price: selector(state, 'discount_price'), //este me ayuda a obtener el valor de descuento de dinero o porcentaje y me ayudara a calcular ya se el porcentaje de descuento o el precio de descuento
-    discount_percentage: selector(state, 'discount_percentage'),
+    list_price: selector(state, "list_price"),
+    discount_price: selector(state, "discount_price"), //este me ayuda a obtener el valor de descuento de dinero o porcentaje y me ayudara a calcular ya se el porcentaje de descuento o el precio de descuento
+    discount_percentage: selector(state, "discount_percentage"),
 
     readOnly,
   };
