@@ -61,7 +61,7 @@ export class CouponPublicDetailComponent extends React.Component {
                 <strong>Total de cupones:{coupon.total_coupons}</strong>
               </div>
               <div>
-                <strong>Total de cupones restantes:{coupon.total_uses}</strong>
+                <strong>Total de cupones utilizados:{coupon.total_uses}</strong>
               </div>
 
               <Button color="success" onClick={this.toggle}>

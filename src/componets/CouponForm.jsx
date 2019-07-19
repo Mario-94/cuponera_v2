@@ -15,12 +15,6 @@ class CouponFormComponent extends React.Component {
     const { dispatch } = this.props;
     const values = { ...this.props, [name]: newValue };
     const { list_price, discount_price, discount_percentage } = values;
-
-    console.log("onchange values", {
-      list_price,
-      discount_price,
-      discount_percentage,
-    });
     if (list_price & discount_price || discount_percentage) {
       let finalPrice = 0;
       let finalDiscount_Percentage = 0;

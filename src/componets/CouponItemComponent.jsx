@@ -56,7 +56,7 @@ export const CouponItemComponent = ({ item, showNameDescription = true }) => (
         <Col style={{ textAlign: 'center' }}>
           Empieza
           <div>
-            <h4> {item.valid_sice}</h4>
+            <h4> {item.valid_since}</h4>
           </div>
         </Col>
         <Col style={{ textAlign: 'center' }}>
