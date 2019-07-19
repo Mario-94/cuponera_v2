@@ -54,9 +54,9 @@ class CouponFormComponent extends Component {
     if (id) {
       return updateCoupon(id, values);
     }
-    console.log(values);
+    
     if (!values.valid_since) {
-      console.log("validando el published_since");
+      
 
       values.valid_since = values.published_since;
     }

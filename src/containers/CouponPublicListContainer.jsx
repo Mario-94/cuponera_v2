@@ -1,9 +1,9 @@
-import React from 'react';
-import { Container, Row, Col } from 'reactstrap';
-import { connect } from 'react-redux';
+import React from "react";
+import { Container, Row, Col } from "reactstrap";
+import { connect } from "react-redux";
 
-import { CouponItemComponent } from '../componets/CouponItemComponent';
-import { getCouponsList } from '../actions/coupons';
+import { CouponItemComponent } from "../componets/CouponItemComponent";
+import { getCouponsList } from "../actions/coupons";
 
 class CouponPublicListComponent extends React.Component {
   componentDidMount() {
@@ -24,8 +24,6 @@ class CouponPublicListComponent extends React.Component {
               }}
             >
               <CouponItemComponent item={item} />
-              
-              
             </Col>
           ))}
         </Row>

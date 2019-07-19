@@ -21,6 +21,7 @@ export class CouponPublicDetailComponent extends React.Component {
     } = this.props;
     if (id) {
       dispatch(retriveCoupon(id));
+      
     }
   }
 
@@ -30,7 +31,6 @@ export class CouponPublicDetailComponent extends React.Component {
 
   render() {
     const { coupon } = this.props;
-    
 
     if (!coupon) {
       return <Spinner color="secondary" />;
@@ -38,8 +38,7 @@ export class CouponPublicDetailComponent extends React.Component {
       return (
         <Container>
           <h1>Detalle publico del cupon</h1>
-{    console.log(this.props.match.params.id)
-}
+
           <Row>
             <Col xs="4" sm="4" lg="4">
               <CouponItemComponent item={coupon} showNameDescription={false} />
@@ -86,5 +85,5 @@ export const CouponPublicDetail = connect(
   selector,
   dispatch => ({
     dispatch,
-  })
+  }),
 )(CouponPublicDetailComponent);

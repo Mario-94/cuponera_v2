@@ -1,6 +1,6 @@
 import React from "react";
 import QrReader from "react-qr-reader";
-
+import {CouponValidationComponent  } from './CouponValidationComponent';
 import { Row, Col, CardBody, Card, Spinner } from "reactstrap";
 
 export class QrScannerComponent extends React.Component {
@@ -16,25 +16,22 @@ export class QrScannerComponent extends React.Component {
       scannerError: "",
     };
   }
-  handleScan(data) {
+  handleScan(data) {        
     if (data && data !== this.state.currentQR) {
       this.setState({
         currentQR: data,
       });
-      this.props.history.push(`/validateCupon/${this.state.currentQR}`);
+      this.props.history.push(`/validateCupon/${this.state.currentQR}`);   
     }
   }
-
   handleError() {
     this.setState({
       currentQR: "Ocurrio un error",
     });
   }
-
   toggle() {
     this.setState(state => ({ currentQR: !state.currentQR }));
   }
-
   render() {
     if (!QrReader) {
       return <Spinner color="primary" />;
@@ -42,16 +39,15 @@ export class QrScannerComponent extends React.Component {
       return (
         <Row className="justify-content-center mb-5">
           <Col xs="12" lg="7">
+           
             <Card>
               <CardBody>
                 <QrReader
                   delay={300}
                   onError={this.handleError}
                   onScan={this.handleScan}
-                  style={{ width: "100%" }}
-                  
-                />
-                {console.log(this.state.currentQR)}
+                  style={{ width: "100%" }}                  
+                />          
               </CardBody>
             </Card>
           </Col>

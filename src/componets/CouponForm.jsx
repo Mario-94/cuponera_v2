@@ -1,30 +1,22 @@
-import React from 'react';
-import { renderField } from './RenderField';
-import { Field, reduxForm, formValueSelector, change } from 'redux-form';
-import {
-  Badge,
-  Form,
-  FormGroup,
-  Label,
-  InputGroup,
-  InputGroupAddon,
-} from 'reactstrap';
-import { validate, warn, normalizePhone} from './Validations';
-import { ImageComponent } from './ImageComponent';
+import React from "react";
+import { renderField } from "./RenderField";
+import { Field, reduxForm, formValueSelector, change } from "redux-form";
+import { Badge, Form, FormGroup, Label, InputGroup, InputGroupAddon } from "reactstrap";
+import { validate, warn, normalizePhone } from "./Validations";
+import { ImageComponent } from "./ImageComponent";
 
 class CouponFormComponent extends React.Component {
   constructor(props) {
     super(props);
     this.calculateFinalPrice = this.calculateFinalPrice.bind(this);
-    this.truncateDecimals = num => Number.parseFloat(Number.parseFloat(num).toFixed(1))
-    
+    this.truncateDecimals = num => Number.parseFloat(Number.parseFloat(num).toFixed(1));
   }
   calculateFinalPrice(event, newValue, previousValue, name) {
     const { dispatch } = this.props;
     const values = { ...this.props, [name]: newValue };
     const { list_price, discount_price, discount_percentage } = values;
 
-    console.log('onchange values', {
+    console.log("onchange values", {
       list_price,
       discount_price,
       discount_percentage,
@@ -34,87 +26,47 @@ class CouponFormComponent extends React.Component {
       let finalDiscount_Percentage = 0;
       let finalDiscount_Price = 0;
 
-      if (name === 'discount_price') {
+      if (name === "discount_price") {
         // Descuento en porcentaje aqui lo calculamos
         finalPrice = discount_price;
-        finalDiscount_Percentage =
-          ((list_price - discount_price) / list_price) * 100;
+        finalDiscount_Percentage = ((list_price - discount_price) / list_price) * 100;
         dispatch(
           change(
-            'cuponsForm',
-            'discount_percentage',
+            "cuponsForm",
+            "discount_percentage",
             this.truncateDecimals(finalDiscount_Percentage),
           ),
         );
-        return dispatch(
-          change(
-            'cuponsForm',
-            'final_price',
-            this.truncateDecimals(finalPrice),
-          ),
-        );
+        return dispatch(change("cuponsForm", "final_price", this.truncateDecimals(finalPrice)));
       }
-      if (name === 'discount_percentage') {
+      if (name === "discount_percentage") {
         // Descuento en precio aqui lo calculamos
         finalPrice = list_price - (list_price * discount_percentage) / 100;
-        dispatch(
-          change(
-            'cuponsForm',
-            'discount_price',
-            this.truncateDecimals(finalPrice),
-          ),
-        );
-        return dispatch(
-          change(
-            'cuponsForm',
-            'final_price',
-            this.truncateDecimals(finalPrice),
-          ),
-        );
+        dispatch(change("cuponsForm", "discount_price", this.truncateDecimals(finalPrice)));
+        return dispatch(change("cuponsForm", "final_price", this.truncateDecimals(finalPrice)));
       }
-      if ((name = 'list_price')) {
+      if ((name = "list_price")) {
         if (discount_price) {
           finalPrice = discount_price;
-          finalDiscount_Percentage =
-            ((list_price - discount_price) / list_price) * 100;
-          dispatch(
-            change(
-              'cuponsForm',
-              'final_price',
-              this.truncateDecimals(finalPrice),
-            ),
-          );
+          finalDiscount_Percentage = ((list_price - discount_price) / list_price) * 100;
+          dispatch(change("cuponsForm", "final_price", this.truncateDecimals(finalPrice)));
           return dispatch(
             change(
-              'cuponsForm',
-              'discount_percentage',
-              this.truncateDecimals(finalDiscount_Percentage)
+              "cuponsForm",
+              "discount_percentage",
+              this.truncateDecimals(finalDiscount_Percentage),
             ),
           );
         }
         if (discount_percentage) {
           finalPrice = list_price - (list_price * discount_percentage) / 100;
-          dispatch(
-            change(
-              'cuponsForm',
-              'discount_price',
-              this.truncateDecimals(finalPrice),
-            ),
-          );
-          return dispatch(
-            change(
-              'cuponsForm',
-              'final_price',
-              this.truncateDecimals(finalPrice),
-            ),
-          );
+          dispatch(change("cuponsForm", "discount_price", this.truncateDecimals(finalPrice)));
+          return dispatch(change("cuponsForm", "final_price", this.truncateDecimals(finalPrice)));
         }
       }
     }
   }
-  
   render() {
-
     const {
       handleSubmit,
       pristine,
@@ -125,12 +77,7 @@ class CouponFormComponent extends React.Component {
       discount_price,
       discount_percentage,
       dispatch,
-      
     } = this.props;
-
-
-    // console.log({ list_price, discount_price, discount_percentage, dispatch });
-
     return (
       <div>
         <Form onSubmit={handleSubmit} id="form1">
@@ -140,21 +87,11 @@ class CouponFormComponent extends React.Component {
           </FormGroup>
           {/* nombre del cupon */}
           <FormGroup>
-            <Field
-              name="name"
-              component={renderField}
-              type="text"
-              label="Nombre"
-            />
+            <Field name="name" component={renderField} type="text" label="Nombre" />
           </FormGroup>
           {/* descripcion del cupon */}
           <FormGroup>
-            <Field
-              name="description"
-              component={renderField}
-              type="textarea"
-              label="Descripcion"
-            />
+            <Field name="description" component={renderField} type="textarea" label="Descripcion" />
           </FormGroup>
           <FormGroup>
             <Field
@@ -172,7 +109,6 @@ class CouponFormComponent extends React.Component {
               <h4>
                 <Badge color="info"> Tipo de cupon</Badge>
               </h4>
-
               {/* cupon de porcentaje es decir "se descuenta sierto porsentaje al producto" */}
               <div>
                 <FormGroup>
@@ -191,24 +127,12 @@ class CouponFormComponent extends React.Component {
                       component={renderField}
                       type="text"
                       name="discount_percentage"
-                      disabled={discountPercentage !== 'porcentaje'}
+                      disabled={discountPercentage !== "porcentaje"}
                       onChange={this.calculateFinalPrice}
-                       parse={value => (!value ? null : Number.parseFloat(value))} 
-                      
+                      parse={value => (!value ? null : Number.parseFloat(value))}
                     />
                   </InputGroup>
                 </FormGroup>
-                {/* <FormGroup>
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">%</InputGroupAddon>
-                    <Field
-                      component={renderField}
-                      type="text"
-                      name="aaa"
-                      normalize={normalizePhone}
-                    />
-                  </InputGroup>
-                </FormGroup> */}
                 {/* cupon de precio es decir monetario "se descuentan 100 pesos a cierto producto" */}
                 <FormGroup>
                   <Field
@@ -224,10 +148,9 @@ class CouponFormComponent extends React.Component {
                       component={renderField}
                       type="number"
                       name="discount_price"
-                      disabled={discountPercentage !== 'dinero'}
+                      disabled={discountPercentage !== "dinero"}
                       onChange={this.calculateFinalPrice}
                       parse={value => (!value ? null : Number.parseFloat(value))}
-
                     />
                   </InputGroup>
                 </FormGroup>
@@ -267,7 +190,12 @@ class CouponFormComponent extends React.Component {
           <FormGroup>
             <Label>Valido desde</Label>
 
-            <Field name="valid_since" component={renderField} type="date" onChange={this.Dates_PublishedSice} />
+            <Field
+              name="valid_since"
+              component={renderField}
+              type="date"
+              onChange={this.Dates_PublishedSice}
+            />
           </FormGroup>
 
           <FormGroup>
@@ -278,7 +206,12 @@ class CouponFormComponent extends React.Component {
           {/* publicar cupon en una fecha determinada*/}
           <FormGroup>
             <Label> Publicar cupon en esta fecha</Label>
-            <Field name="published_since" component={renderField} type="date" onChange={this.Dates_PublishedSice} />
+            <Field
+              name="published_since"
+              component={renderField}
+              type="date"
+              onChange={this.Dates_PublishedSice}
+            />
           </FormGroup>
 
           {/* total de cupones  */}
@@ -326,19 +259,6 @@ class CouponFormComponent extends React.Component {
               label="Habilitar cupon"
             />
           </FormGroup>
-
-          {/*total de usos del cupoen el cual sera por default*/}
-          {/* <FormGroup>
-            <Label>Cupones echos validos</Label>
-            <Field
-              name="total_uses"
-              component="input"
-              normalize={greaterThan('total_uses')}
-              disabled
-            />
-          </FormGroup>
-        */}
-          {/* Localizacion del local puede o no llenar este campo sino se manda vacio */}
           <FormGroup>
             <Field
               name="location"
@@ -349,11 +269,7 @@ class CouponFormComponent extends React.Component {
           </FormGroup>
 
           <button type="submit">Guardar</button>
-          <button
-            type="button"
-            disabled={pristine || submitting}
-            onClick={reset}
-          >
+          <button type="button" disabled={pristine || submitting} onClick={reset}>
             Limpiar valores
           </button>
         </Form>
@@ -363,7 +279,7 @@ class CouponFormComponent extends React.Component {
 }
 
 export const CouponForm = reduxForm({
-  form: 'cuponsForm',
+  form: "cuponsForm",
   validate,
   warn,
 })(CouponFormComponent);
