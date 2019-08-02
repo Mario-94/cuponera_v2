@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getCouponsList, deleteCoupon } from '../actions/coupons';
-import { Spinner, Table, Container } from 'reactstrap';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getCouponsList, deleteCoupon } from "../actions/coupons";
+import { Spinner, Table, Container } from "reactstrap";
 
 class CouponList extends Component {
   componentDidMount() {
@@ -15,7 +15,7 @@ class CouponList extends Component {
   }
 
   render() {
-    const { coupons, history, location } = this.props;
+    const { coupons, history } = this.props;
 
     if (!coupons) {
       return (
@@ -26,7 +26,6 @@ class CouponList extends Component {
     }
     return (
       <Container>
-        
         <Table hover>
           <thead>
             <tr>
@@ -35,6 +34,8 @@ class CouponList extends Component {
               <th>Descripcion</th>
               <th>Publicado</th>
               <th>Habilitado</th>
+              <th>Vigente/Caduco</th>
+              <th>Editar</th>
             </tr>
           </thead>
           {coupons.map((item, index) => (
@@ -44,15 +45,12 @@ class CouponList extends Component {
                   history.push(`/detail/${item._id.$oid}`);
                 }}
               >
-                <th>
-                  {item.image && (
-                    <img style={{ width: 50, heigth: 50 }} src={item.image} />
-                  )}
-                </th>
+                <th>{item.image && <img style={{ width: 50, heigth: 50 }} src={item.image} />}</th>
                 <th scope="row">{item.name}</th>
                 <td>{item.description}</td>
-                <td>{item.is_published ? 'Publicado' : 'no publiado'}</td>
-                <td>{item.is_enable ? 'Habilitado' : 'Desabilitado'}</td>
+                <td>{item.is_published ? "Publicado" : "no publiado"}</td>
+                <td>{item.is_enable ? "Habilitado" : "Desabilitado"}</td>
+                <td>{new Date() <= new Date(item.valid_until) ? "Vigente" : "Caduco"}</td>
                 <td>
                   <button
                     onClick={e => {
@@ -67,7 +65,7 @@ class CouponList extends Component {
                     onClick={e => {
                       e.preventDefault();
                       e.stopPropagation();
-                      this.onDelete(item._id['$oid']);
+                      this.onDelete(item._id["$oid"]);
                     }}
                   >
                     Delete

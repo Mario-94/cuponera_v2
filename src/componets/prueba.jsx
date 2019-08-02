@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { getCouponsList, updateTotalUses } from "../actions/coupons";
 import { connect } from "react-redux";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row } from "reactstrap";
 class prueba extends Component {
   componentDidMount() {
     this.props.getCouponsList();

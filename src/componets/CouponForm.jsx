@@ -1,9 +1,8 @@
 import React from "react";
 import { renderField } from "./RenderField";
-import { Field, reduxForm, formValueSelector, change } from "redux-form";
+import { Field, reduxForm, change } from "redux-form";
 import { Badge, Form, FormGroup, Label, InputGroup, InputGroupAddon } from "reactstrap";
-import { validate, warn, normalizePhone } from "./Validations";
-import { ImageComponent } from "./ImageComponent";
+import { validate, warn } from "./Validations";
 
 class CouponFormComponent extends React.Component {
   constructor(props) {
@@ -18,7 +17,6 @@ class CouponFormComponent extends React.Component {
     if (list_price & discount_price || discount_percentage) {
       let finalPrice = 0;
       let finalDiscount_Percentage = 0;
-      let finalDiscount_Price = 0;
 
       if (name === "discount_price") {
         // Descuento en porcentaje aqui lo calculamos
@@ -61,17 +59,7 @@ class CouponFormComponent extends React.Component {
     }
   }
   render() {
-    const {
-      handleSubmit,
-      pristine,
-      reset,
-      submitting,
-      discountPercentage,
-      list_price,
-      discount_price,
-      discount_percentage,
-      dispatch,
-    } = this.props;
+    const { handleSubmit, pristine, reset, submitting, discountPercentage } = this.props;
     return (
       <div>
         <Form onSubmit={handleSubmit} id="form1">

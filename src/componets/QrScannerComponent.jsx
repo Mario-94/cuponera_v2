@@ -1,6 +1,6 @@
 import React from "react";
 import QrReader from "react-qr-reader";
-import {CouponValidationComponent  } from './CouponValidationComponent';
+
 import { Row, Col, CardBody, Card, Spinner } from "reactstrap";
 
 export class QrScannerComponent extends React.Component {
