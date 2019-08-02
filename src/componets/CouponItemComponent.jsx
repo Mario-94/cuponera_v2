@@ -37,15 +37,14 @@ export const CouponItemComponent = ({ item, showNameDescription = true }) => (
         </Col>
         <Col>
           <h2>
-            <Badge color="danger">%{item.discount_percenatage}</Badge>
+            <Badge color="danger">%{item.discount_percentage}</Badge>
           </h2>
         </Col>
         <Col>
           <h2>
             <Badge color="success">
-              {item.discount_percenatage
-                ? `-${item.discount_percenatage}%`
-                : ` -${item.discount_price}$`}
+              ${item.discount_price
+               }
             </Badge>
           </h2>
         </Col>
