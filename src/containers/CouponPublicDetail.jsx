@@ -21,7 +21,6 @@ export class CouponPublicDetailComponent extends React.Component {
     } = this.props;
     if (id) {
       dispatch(retriveCoupon(id));
-      
     }
   }
 
@@ -36,43 +35,43 @@ export class CouponPublicDetailComponent extends React.Component {
       return <Spinner color="secondary" />;
     } else {
       return (
-        <Container>
-          <h1>Detalle publico del cupon</h1>
-
-          <Row>
-            <Col xs="4" sm="4" lg="4">
-              <CouponItemComponent item={coupon} showNameDescription={false} />
-              <hr />
-              redes sociales
-              <hr />
-              mapa
-            </Col>
-            <Col xs="8" sm="8" lg="8">
-              <h2>{coupon.name}</h2>
-              <hr />
-              <p>{coupon.description}</p>
-              <hr />
-              <p>{coupon.terms_of_user}</p>
-              <hr />
-              <div>
-                <strong>Usos por usuario:{coupon.uses_per_user}</strong>
-              </div>
-              <div>
-                <strong>Total de cupones:{coupon.total_coupons}</strong>
-              </div>
-              <div>
-                <strong>Total de cupones utilizados:{coupon.total_uses}</strong>
-              </div>
-
-              <Button color="success" onClick={this.toggle}>
-                usar cupon
-              </Button>
-              <Collapse isOpen={this.state.collapse}>
-                <QRCode size="400" value={this.props.match.params.id} />
-              </Collapse>
-            </Col>
-          </Row>
-        </Container>
+        
+          <Container>
+            <h1>Detalle publico del cupon</h1>
+            <Row>
+              <Col>
+                <CouponItemComponent item={coupon} showNameDescription={false} />
+                <hr />
+                redes sociales
+                <hr />
+                mapa
+              </Col>
+              <Col>
+                <h2>{coupon.name}</h2>
+                <hr />
+                <p>{coupon.description}</p>
+                <hr />
+                <p>{coupon.terms_of_user}</p>
+                <hr />
+                <Row>
+                  <strong>Usos por usuario:{coupon.uses_per_user}</strong>
+                </Row>
+                <Row>
+                  <strong>Total de cupones:{coupon.total_coupons}</strong>
+                </Row>
+                <Row>
+                  <strong>Total de cupones utilizados:{coupon.total_uses}</strong>
+                </Row>
+                <Button color="success" onClick={this.toggle}>
+                  usar cupon
+                </Button>
+                <Collapse isOpen={this.state.collapse}>
+                  <QRCode size="400" value={this.props.match.params.id} />
+                </Collapse>
+              </Col>
+            </Row>
+          </Container>
+        
       );
     }
   }

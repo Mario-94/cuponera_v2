@@ -35,6 +35,7 @@ class CouponList extends Component {
               <th>Publicado</th>
               <th>Habilitado</th>
               <th>Vigente/Caduco</th>
+              <th>Total de cupones</th>
               <th>Editar</th>
             </tr>
           </thead>
@@ -51,6 +52,7 @@ class CouponList extends Component {
                 <td>{item.is_published ? "Publicado" : "no publiado"}</td>
                 <td>{item.is_enable ? "Habilitado" : "Desabilitado"}</td>
                 <td>{new Date() <= new Date(item.valid_until) ? "Vigente" : "Caduco"}</td>
+                <th>{item.total_coupons}</th>
                 <td>
                   <button
                     onClick={e => {
